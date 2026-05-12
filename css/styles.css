@@ -1,0 +1,25 @@
+/* Дополнительные стили поверх Tailwind */
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+.tab-btn.tab-active {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.22), rgba(34, 211, 238, 0.12));
+  color: #fff;
+  box-shadow: 0 0 24px -8px rgba(167, 139, 250, 0.45);
+}
+
+.tab-btn:not(.tab-active) {
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.tab-btn:not(.tab-active):hover {
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+}

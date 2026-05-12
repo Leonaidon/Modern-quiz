@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // MVP: открытый доступ — для продакшена подключите Firebase Auth и ограничьте write.
+    match /quizzes/{quizId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+  }
+}
