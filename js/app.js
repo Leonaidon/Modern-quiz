@@ -8,7 +8,6 @@ import {
   getFirestoreDb,
   subscribeQuizzes,
   saveQuizRemote,
-  deleteQuizRemote,
   migrateLocalToFirestoreOnce,
 } from './firebase-quiz.js';
 
@@ -202,6 +201,155 @@ const OFFICIAL_QUIZZES = [
         ]
       }
     ]
+  },
+  {
+    id: 'film-culture-15',
+    title: '🎬 Насколько ты в кино?',
+    description: '15 вопросов: режиссёры, приёмы, история и факты — насколько ты близок к кинокультуре.',
+    source: 'official',
+    resultTexts: {
+      buff: 'Кинобуф. Ты не просто смотришь — ты понимаешь контекст, имена и «как это снято». Билет на фестиваль тебе положен.',
+      fan: 'Зритель со вкусом. Солидная база: классика и мейнстрим держишь уверенно, пара узких мест — не беда.',
+      casual: 'Любитель кино. Смотришь с удовольствием, но без «домашки» — многое узнаёшь из трейлеров и обсуждений.',
+      tourist: 'Наблюдатель со стороны. Пока чаще путаешь факты и названия — зато впереди много открытий и хороших сеансов.'
+    },
+    questions: [
+      {
+        text: 'Кто режиссёр «Криминального чтива»?',
+        answers: [
+          { text: 'Квентин Тарантино', scores: { buff: 5, fan: 3 } },
+          { text: 'Мартин Скорсезе', scores: { tourist: 4, casual: 2 } },
+          { text: 'Гай Ричи', scores: { casual: 3, fan: 1 } },
+          { text: 'Фрэнсис Форд Коппола', scores: { tourist: 2, casual: 1 } }
+        ]
+      },
+      {
+        text: 'Фильм «1+1» (Intouchables) — это…',
+        answers: [
+          { text: 'Оригинальная французская лента', scores: { buff: 5, fan: 4 } },
+          { text: 'Голливудский блокбастер', scores: { tourist: 5, casual: 2 } },
+          { text: 'Британская драма', scores: { casual: 3, tourist: 2 } },
+          { text: 'Итальянская комедия', scores: { tourist: 3, casual: 2 } }
+        ]
+      },
+      {
+        text: '«Оскар» за лучший фильм на церемонии 2020 года (за фильмы 2019 года) получил…',
+        answers: [
+          { text: '«Паразиты»', scores: { buff: 5, fan: 5 } },
+          { text: '«1917»', scores: { fan: 2, casual: 3 } },
+          { text: '«Джокер»', scores: { casual: 3, fan: 1 } },
+          { text: '«Однажды в… Голливуде»', scores: { casual: 2, tourist: 1 } }
+        ]
+      },
+      {
+        text: 'Саундтрек к «Интерстеллару» написал…',
+        answers: [
+          { text: 'Ханс Циммер', scores: { buff: 5, fan: 5 } },
+          { text: 'Джон Уильямс', scores: { tourist: 4, casual: 2 } },
+          { text: 'Говард Шор', scores: { casual: 3 } },
+          { text: 'Джонни Гринвуд', scores: { fan: 1, casual: 2 } }
+        ]
+      },
+      {
+        text: 'Режиссёр фильма «Дюна» (2021)?',
+        answers: [
+          { text: 'Дени Вильнёв', scores: { buff: 5, fan: 5 } },
+          { text: 'Дэвид Линч', scores: { fan: 2, casual: 2 } },
+          { text: 'Ридли Скотт', scores: { tourist: 3, casual: 2 } },
+          { text: 'Кристофер Нолан', scores: { casual: 3, tourist: 2 } }
+        ]
+      },
+      {
+        text: '«Сталкер» Андрея Тарковского снят по мотивам произведения…',
+        answers: [
+          { text: '«Пикник на обочине» (Стругацкие)', scores: { buff: 5, fan: 4 } },
+          { text: '«Солярис» Станислава Лема', scores: { fan: 1, casual: 3, tourist: 2 } },
+          { text: '«Мастер и Маргарита»', scores: { tourist: 4, casual: 2 } },
+          { text: 'Оригинальный сценарий, без литературной основы', scores: { tourist: 3, casual: 2 } }
+        ]
+      },
+      {
+        text: 'В каком фильме Арнольд Шварценеггер впервые произнёс фразу «Я вернусь»?',
+        answers: [
+          { text: '«Терминатор» (1984)', scores: { buff: 5, fan: 5 } },
+          { text: '«Команда»', scores: { casual: 3, tourist: 2 } },
+          { text: '«Конан-варвар»', scores: { casual: 2, fan: 1 } },
+          { text: '«Вспомнить всё»', scores: { tourist: 4, casual: 2 } }
+        ]
+      },
+      {
+        text: 'Как называется приём, когда зритель видит сцену глазами персонажа?',
+        answers: [
+          { text: 'Субъективная камера (POV)', scores: { buff: 5, fan: 4 } },
+          { text: 'Общий план', scores: { tourist: 4, casual: 2 } },
+          { text: 'Долли-зум', scores: { fan: 2, casual: 2 } },
+          { text: 'Склейка по форме', scores: { casual: 3, tourist: 1 } }
+        ]
+      },
+      {
+        text: 'Кто сыграл Джокера в «Тёмном рыцаре» Кристофера Нолана?',
+        answers: [
+          { text: 'Хит Леджер', scores: { buff: 5, fan: 5 } },
+          { text: 'Хоакин Феникс', scores: { casual: 3, fan: 1 } },
+          { text: 'Джаред Лето', scores: { tourist: 3, casual: 2 } },
+          { text: 'Джек Николсон', scores: { fan: 2, casual: 2 } }
+        ]
+      },
+      {
+        text: '«Седьмая печать» — картина какого режиссёра?',
+        answers: [
+          { text: 'Ингмар Бергман', scores: { buff: 5, fan: 4 } },
+          { text: 'Андрей Тарковский', scores: { tourist: 4, casual: 2 } },
+          { text: 'Федерико Феллини', scores: { casual: 3, tourist: 1 } },
+          { text: 'Люк Бессон', scores: { tourist: 5, casual: 1 } }
+        ]
+      },
+      {
+        text: 'Как называется визуальный эффект, когда передний план резкий, а фон сильно размыт?',
+        answers: [
+          { text: 'Малая глубина резкости (размытый фон / bokeh)', scores: { buff: 5, fan: 4 } },
+          { text: 'Параллакс', scores: { tourist: 3, casual: 2 } },
+          { text: 'Низкий ракурс', scores: { casual: 3 } },
+          { text: 'Широкоугольная дисторсия', scores: { fan: 1, casual: 2 } }
+        ]
+      },
+      {
+        text: 'Кто из режиссёров обычно не относят к «новому Голливуду» 1970-х?',
+        answers: [
+          { text: 'Альфред Хичкок', scores: { buff: 5, fan: 4 } },
+          { text: 'Фрэнсис Форд Коппола', scores: { tourist: 4, casual: 2 } },
+          { text: 'Мартин Скорсезе', scores: { tourist: 4, casual: 2 } },
+          { text: 'Стивен Спилберг', scores: { tourist: 3, casual: 2 } }
+        ]
+      },
+      {
+        text: 'Действие «Амели» разворачивается преимущественно в…',
+        answers: [
+          { text: 'Париже', scores: { buff: 5, fan: 5 } },
+          { text: 'Лионе', scores: { casual: 2, tourist: 2 } },
+          { text: 'Брюсселе', scores: { tourist: 3, casual: 2 } },
+          { text: 'Марселе', scores: { casual: 2, fan: 1 } }
+        ]
+      },
+      {
+        text: 'Какой из этих фильмов чаще называют вехой эры звукового кино начала XX века?',
+        answers: [
+          { text: '«Певец джаза» (1927)', scores: { buff: 5, fan: 3 } },
+          { text: '«Рождение нации»', scores: { casual: 2, tourist: 2 } },
+          { text: '«Гражданин Кейн»', scores: { fan: 2, casual: 3 } },
+          { text: '«Касабланка»', scores: { casual: 3, fan: 1 } }
+        ]
+      },
+      {
+        text: '«Зелёная миля» экранизирует роман…',
+        answers: [
+          { text: 'Стивена Кинга', scores: { buff: 5, fan: 5 } },
+          { text: 'Джона Стейнбека', scores: { tourist: 4, casual: 2 } },
+          { text: 'Харпер Ли', scores: { casual: 3, tourist: 2 } },
+          { text: 'Курта Воннегута', scores: { fan: 1, casual: 2 } }
+        ]
+      }
+    ]
   }
 ];
 
@@ -282,20 +430,7 @@ function upsertLocalQuiz(quiz) {
   saveCommunity(list);
 }
 
-function setCommunityStatus(text, variant = 'muted') {
-  const el = document.getElementById('community-sync-status');
-  if (!el) return;
-  el.textContent = text;
-  if (variant === 'error') {
-    el.className = 'text-xs text-amber-400';
-  } else if (variant === 'ok') {
-    el.className = 'text-xs text-emerald-400/90';
-  } else {
-    el.className = 'text-xs text-slate-500';
-  }
-}
-
-function quizCard(quiz, onPlay, onDelete) {
+function quizCard(quiz, onPlay) {
   const el = document.createElement('div');
   el.className =
     'rounded-2xl border border-white/5 bg-card p-4 shadow-inner transition hover:border-violet-500/20 hover:shadow-glow';
@@ -307,13 +442,11 @@ function quizCard(quiz, onPlay, onDelete) {
         <p class="mt-2 text-xs text-slate-500">${quiz.questions?.length ?? 0} вопросов · ${quiz.source === 'official' ? 'официально' : 'сообщество'}</p>
       </div>
       <div class="flex shrink-0 gap-2 pt-2 sm:pt-0">
-        ${onDelete ? `<button type="button" class="btn-del rounded-xl border border-white/10 px-3 py-2 text-xs text-slate-400 hover:border-rose-500/40 hover:text-rose-300">Удалить</button>` : ''}
         <button type="button" class="btn-play rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-md hover:opacity-95">Играть</button>
       </div>
     </div>
   `;
   el.querySelector('.btn-play')?.addEventListener('click', () => onPlay(quiz));
-  el.querySelector('.btn-del')?.addEventListener('click', () => onDelete(quiz));
   return el;
 }
 
@@ -584,7 +717,7 @@ function renderOfficialList() {
   const officialList = document.getElementById('official-list');
   officialList.innerHTML = '';
   OFFICIAL_QUIZZES.forEach((q) => {
-    officialList.appendChild(quizCard(q, openPlay, null));
+    officialList.appendChild(quizCard(q, openPlay));
   });
 }
 
@@ -603,18 +736,7 @@ function renderCommunityFromLocal() {
     return;
   }
   community.forEach((q) => {
-    communityList.appendChild(
-      quizCard(q, openPlay, async (quiz) => {
-        try {
-          if (getFirestoreDb()) await deleteQuizRemote(quiz.id);
-          const next = loadCommunity().filter((x) => x.id !== quiz.id);
-          saveCommunity(next);
-          if (!getFirestoreDb()) renderCommunityFromLocal();
-        } catch (err) {
-          alert(err.message || 'Не удалось удалить');
-        }
-      })
-    );
+    communityList.appendChild(quizCard(q, openPlay));
   });
 }
 
@@ -629,31 +751,13 @@ function renderCommunityList(list) {
     return;
   }
   list.forEach((q) => {
-    communityList.appendChild(
-      quizCard(q, openPlay, async (quiz) => {
-        try {
-          if (getFirestoreDb()) {
-            await deleteQuizRemote(quiz.id);
-            const next = loadCommunity().filter((x) => x.id !== quiz.id);
-            saveCommunity(next);
-          } else {
-            const next = loadCommunity().filter((x) => x.id !== quiz.id);
-            saveCommunity(next);
-            renderCommunityFromLocal();
-          }
-        } catch (err) {
-          alert(err.message || 'Не удалось удалить');
-        }
-      })
-    );
+    communityList.appendChild(quizCard(q, openPlay));
   });
 }
 
 async function initCommunitySync() {
-  setCommunityStatus('Подключение к Firebase…', 'muted');
   const db = getFirestoreDb();
   if (!db) {
-    setCommunityStatus('Облако недоступно — показаны локальные тесты (localStorage).', 'error');
     renderCommunityFromLocal();
     return;
   }
@@ -663,21 +767,15 @@ async function initCommunitySync() {
     unsubscribeCommunity = subscribeQuizzes(
       (list) => {
         saveCommunity(list);
-        setCommunityStatus('Firestore: список обновляется автоматически.', 'ok');
         renderCommunityList(list);
       },
       (err) => {
         console.error(err);
-        setCommunityStatus(
-          `Ошибка Firestore (${err.code || err.message || 'unknown'}). Показаны локальные данные.`,
-          'error'
-        );
         renderCommunityFromLocal();
       }
     );
   } catch (e) {
     console.error(e);
-    setCommunityStatus('Не удалось синхронизировать — локальный режим.', 'error');
     renderCommunityFromLocal();
   }
 }
